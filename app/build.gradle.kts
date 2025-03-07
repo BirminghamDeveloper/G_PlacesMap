@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt.android)
-    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    alias(libs.plugins.androidx.navigation.safe.args)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -54,16 +55,48 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+
+    //fragment navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    //google gms
+    implementation(libs.play.services.maps)
+
+    //coil
     implementation(libs.coil)
-    implementation (libs.places)
 
-    implementation ("pub.devrel:easypermissions:3.0.0")
+    //google places
+    implementation(libs.volley)
+    implementation(libs.places)
 
-    implementation (libs.hilt.android)
-    ksp (libs.dagger.hilt.android.compiler)
+    //easy permission
+    implementation(libs.easypermissions.ktx)
 
+    //datastore
+    implementation(libs.androidx.datastore.preferences)
+
+    //map utils
+    implementation(libs.android.maps.utils)
+
+    //room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.runtime)
     ksp(libs.room.compiler)
+
+    //dagger hilt
+    implementation(libs.hilt.android)
+    ksp(libs.dagger.hilt.android.compiler)
+
+    implementation(libs.androidx.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+
+
 }
