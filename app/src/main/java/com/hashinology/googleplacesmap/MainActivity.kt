@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 if (intent != null) {
                     val place = Autocomplete.getPlaceFromIntent(intent)
                     Log.i(
-                        "TAG", "Place: ${place.name}, ${place.id}"
+                        "TAG", "Place: ${place.displayName}, ${place.id}"
                     )
                 }
             } else if (result.resultCode == Activity.RESULT_CANCELED) {
@@ -49,20 +50,32 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Configure Autocomplete
-        val fields = listOf(Place.Field.ID, Place.Field.NAME)
-        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
-            .build(this)
-
-        // Step 2: Launch the Autocomplete intent
-        startAutocomplete.launch(intent)
     }
-
+    // Inflate Menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_search -> {
+                // Configure Autocomplete
+                val fields = listOf(Place.Field.ID, Place.Field.DISPLAY_NAME)
+                val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                    .build(this)
+                // Step 2: Launch the Autocomplete intent
+                // deprecated way
+//        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
+                // latest Way
+                startAutocomplete.launch(intent)
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    /*// old code
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
@@ -71,5 +84,5 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onActivityResult(requestCode, resultCode, data, caller)
 
-    }
+    }*/
 }

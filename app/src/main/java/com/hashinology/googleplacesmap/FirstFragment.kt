@@ -30,9 +30,9 @@ class FirstFragment : Fragment() {
         val placeClient = Places.createClient(requireContext())
 
         // Initialize the AutocompleteSupportFragment.
-        val autocompleteFragment =
-            /*activity?.supportFragmentManager?.findFragmentById(R.id.autocomplete_fragment)
-                    as AutocompleteSupportFragment*/
+        /*val autocompleteFragment =
+            *//*activity?.supportFragmentManager?.findFragmentById(R.id.autocomplete_fragment)
+                    as AutocompleteSupportFragment*//*
             childFragmentManager.findFragmentById(R.id.autocomplete_fragment)
                     as AutocompleteSupportFragment
 
@@ -48,7 +48,7 @@ class FirstFragment : Fragment() {
             override fun onError(status: Status) {
                 Log.i("TAG", "An error occurred: $status")
             }
-        })
+        })*/
 
         return binding!!.root
     }
