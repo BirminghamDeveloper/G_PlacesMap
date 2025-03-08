@@ -7,40 +7,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.common.api.Status
+import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.hashinology.googleplacesmap.databinding.FragmentFirstBinding
 
+
 class FirstFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        // initialise the AutocompleSupportFragment
+        // initialise the SDK
+        Places.initialize(requireContext(), getString(R.string.google_maps_API_key))
+
+        // Create a new PlacesClient Instance
+        val placeClient = Places.createClient(requireContext())
+
+        // Initialize the AutocompleteSupportFragment.
         val autocompleteFragment =
-            childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
+            /*activity?.supportFragmentManager?.findFragmentById(R.id.autocomplete_fragment)
+                    as AutocompleteSupportFragment*/
+            childFragmentManager.findFragmentById(R.id.autocomplete_fragment)
+                    as AutocompleteSupportFragment
 
-        // Specify the types of place data to return
-        autocompleteFragment.setPlaceFields(Place.Field.ID, Place.Field.NAME)
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.DISPLAY_NAME))
 
-        // Setup a PlaceSelectionListner to handle the reposne
+        // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                Log.i("TAG", "Plce: ${place.name}, ${place.id}")
+                Log.i("TAG", "Place: ${place.displayName}, ${place.id} ")
             }
 
             override fun onError(status: Status) {
-                Log.i("TAG", "An Error Occured: $status")
+                Log.i("TAG", "An error occurred: $status")
             }
         })
-        return binding.root
+
+        return binding!!.root
     }
 
     override fun onDestroy() {

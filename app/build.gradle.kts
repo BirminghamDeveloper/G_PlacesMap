@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidx.navigation.safe.args)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
+    implementation(libs.androidx.runner)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
