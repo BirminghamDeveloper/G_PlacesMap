@@ -29,12 +29,12 @@ class MainActivity : AppCompatActivity() {
                 if (intent != null) {
                     val place = Autocomplete.getPlaceFromIntent(intent)
                     Log.i(
-                        "TAG", "Place: ${place.displayName}, ${place.id}"
+                        "MainActivity", "Place: ${place.displayName}, ${place.id}"
                     )
                 }
             } else if (result.resultCode == Activity.RESULT_CANCELED) {
                 // The user canceled the operation.
-                Log.i(TAG, "User canceled autocomplete")
+                Log.i("MainActivity", "User canceled autocomplete")
             }
         }
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    // Inflate Menu
+    // Inflate Menu to Initialise
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
