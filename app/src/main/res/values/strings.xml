@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Google Places Map</string>
-    <string name="google_maps_API_key">AIzaSyDgsmrP--OksfTzb2c0iSilAy9HFeQ8FM8</string>
+<!--    <string name="google_maps_API_key">AIzaSyDgsmrP&#45;&#45;OksfTzb2c0iSilAy9HFeQ8FM8</string>-->
+    <string name="google_maps_API_key">AIzaSyBAVIk5PkjfBHflOCJ-x93EPA-fCtu0XjM</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

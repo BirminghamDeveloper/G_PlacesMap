@@ -47,13 +47,13 @@ class FirstFragment : Fragment() {
         Places.initialize(requireContext(), getString(R.string.google_maps_API_key))
         placesClient = Places.createClient(requireContext())
 
-        // Initialize AutocompleteFragment
+        // Initialize AutocompleteFragment by adding the PlaceSelectionListener
         val autocompleteFragment = childFragmentManager
             .findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.DISPLAY_NAME))
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                Log.d("Autocomplete", "Selected: ${place.displayName}")
+                Log.d("Autocomplete", "Selected: ${place.displayName} Id: ${place.id}")
             }
 
             override fun onError(status: Status) {
